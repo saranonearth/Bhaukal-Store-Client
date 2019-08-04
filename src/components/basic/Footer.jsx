@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <>
@@ -11,8 +11,13 @@ const Footer = () => {
                 <strong>Follow us</strong>
               </p>
               <div className='social-holder'>
-                <i className='fab fa-instagram fa-2x opacity' />
-                <i className='fab fa-facebook-square facebook fa-2x opacity' />
+                <a
+                  href='https://www.instagram.com/bhaukal_fashion/'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <i className='fab fa-instagram fa-2x opacity' />
+                </a>
               </div>
             </div>
             <div className='sec-2'>
@@ -25,8 +30,12 @@ const Footer = () => {
               <p>
                 <strong>Company</strong>
               </p>
-              <p className='opacity'>About Us</p>
-              <p className='opacity'>Contact</p>
+              <Link className='no-td' to='/about'>
+                <p className='opacity'>About Us</p>
+              </Link>
+              <Link className='no-td' to='/contact'>
+                <p className='opacity'>Contact Us</p>
+              </Link>
             </div>
           </div>
         </div>

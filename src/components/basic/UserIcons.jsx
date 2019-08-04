@@ -8,7 +8,7 @@ const UserIcons = () => {
   };
 
   return (
-    <div>
+    <>
       <div className='user-mobile-icon no-in-desktop'>
         <div className='dropdown' onClick={showUserMenue}>
           <div>
@@ -16,24 +16,29 @@ const UserIcons = () => {
           </div>
           <div className={`dropdown-content ${openclose ? 'iconshow' : null}`}>
             <Link to='/user'>Orders</Link>
-            <a href='#'>FAQs</a>
-            <a href='#'>Logout</a>
+            <Link to='/faqs'>FAQs</Link>
+            <Link to='/#'>Logout</Link>
           </div>
         </div>
       </div>
-      <div className='cart-mobile-icon no-in-desktop'>
-        <i
-          data-count='3'
-          className='fa fa-shopping-cart cart badge user-icon'
-        />
-      </div>
-      <div className='cart-desktop-icon no-in-mobile'>
-        <i
-          data-count='3'
-          className='fa fa-shopping-cart cart badge user-icon'
-        />
-      </div>
-    </div>
+      <Link to='/user/cart'>
+        <div className='cart-mobile-icon no-in-desktop'>
+          <i
+            data-count='3'
+            className='fa fa-shopping-cart cart badge user-icon'
+          />
+        </div>
+      </Link>
+
+      <Link to='/user/cart'>
+        <div className='cart-desktop-icon no-in-mobile'>
+          <i
+            data-count='3'
+            className='fa fa-shopping-cart cart badge user-icon'
+          />
+        </div>
+      </Link>
+    </>
   );
 };
 

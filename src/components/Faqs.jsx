@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ProfileMenu from './basic/ProfileMenu';
-import Orderlist from './basic/Orderlist';
+import Faq from './basic/Faq';
 import Footer from './basic/Footer';
-const Orders = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
+const Faqs = () => {
   return (
     <>
       <div className='panel-container'>
@@ -18,7 +15,17 @@ const Orders = () => {
             <hr />
             <ProfileMenu />
           </div>
-          <Orderlist />
+          <div className='panel-content'>
+            <div className='sidebar-heading'>
+              <h2 className='margin-2'>FAQs</h2>
+            </div>
+            <hr />
+            <div className='faqs'>
+              <Faq />
+              <Faq />
+              <Faq />
+            </div>
+          </div>
         </div>
       </div>
       <Footer />
@@ -26,4 +33,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default Faqs;

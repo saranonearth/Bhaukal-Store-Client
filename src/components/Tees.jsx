@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import ProductList from './basic/ProductList';
 import Footer from './basic/Footer';
-
-const Tofm = () => {
+const Tees = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <>
       <div className='container'>
         <div className='outof-sticky'>
           <div className='header-img'>
             <div className='image-holder'>
-              <h1>Tees of the month</h1>
+              <h1>Grab what is relatable to you!</h1>
             </div>
           </div>
         </div>
@@ -31,4 +31,4 @@ const Tofm = () => {
   );
 };
 
-export default Tofm;
+export default Tees;

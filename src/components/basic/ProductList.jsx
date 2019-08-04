@@ -1,11 +1,13 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const ProductList = () => {
   return (
     <>
       <div className='product'>
         <div className='product-img'>
-          <img src='https://via.placeholder.com/150' alt='' />
+          <Link to='/product/SDSD552'>
+            <img src='https://via.placeholder.com/150' alt='prd-img' />
+          </Link>
         </div>
         <div className='product-content'>
           <p className='product-description'>

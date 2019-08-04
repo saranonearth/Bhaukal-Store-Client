@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProfileMenu from './basic/ProfileMenu';
 import Footer from './basic/Footer';
-const Profile = () => {
+import ChangePasswordModal from './basic/modals/ChangePasswordModal';
+import { connect } from 'react-redux';
+import {
+  changePasswordModal,
+  editProfileModal,
+  confirmationModal
+} from '../actions/ModalAction';
+import ConfirmationModal from './basic/modals/ConfirmationModal';
+import EditProfileModal from './basic/modals/EditProfileModal';
+const Profile = ({
+  modal,
+  changePasswordModal,
+  editProfileModal,
+  confirmationModal
+}) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div className='panel-container'>
@@ -48,20 +65,32 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className='editprofile-btn mt-2'>
-                    <button className='btn black' id='myBtn'>
-                      EDIT
+                    <button
+                      onClick={() => editProfileModal()}
+                      className='btn black'
+                      id='myBtn'
+                    >
+                      Edit Profile
                     </button>
                   </div>
                 </div>
               </div>
               <div className='profile-buttons'>
                 <div>
-                  <button className='change-password btn remove ca' id='chBtn'>
+                  <button
+                    onClick={() => changePasswordModal()}
+                    className='change-password btn remove ca'
+                    id='chBtn'
+                  >
                     Change Password
                   </button>
                 </div>
                 <div className=''>
-                  <button id='coBtn' className='delete-account btn delete'>
+                  <button
+                    onClick={() => confirmationModal()}
+                    id='coBtn'
+                    className='delete-account btn delete'
+                  >
                     Delete Account
                   </button>
                 </div>
@@ -70,9 +99,21 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      {modal.changePasswordModal ? <ChangePasswordModal /> : null}
+      {modal.editProfileModal ? <EditProfileModal /> : null}
+      {modal.confirmationModal ? (
+        <ConfirmationModal closeFunction={confirmationModal} />
+      ) : null}
       <Footer />
     </>
   );
 };
 
-export default Profile;
+const mapStatetoProps = state => ({
+  modal: state.modal
+});
+
+export default connect(
+  mapStatetoProps,
+  { changePasswordModal, editProfileModal, confirmationModal }
+)(Profile);

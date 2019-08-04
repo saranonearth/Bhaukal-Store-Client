@@ -4,7 +4,11 @@ import {
 import {
     alertReducer
 } from './alertReducer';
+import {
+    modalReducer
+} from './ModalReducer';
 
 export const rootReducer = combineReducers({
-    alert: alertReducer
+    alert: alertReducer,
+    modal: modalReducer
 })

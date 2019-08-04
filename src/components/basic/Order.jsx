@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Order = () => {
+  const orderid = 'DS5DXS';
   return (
     <>
       <div className='order'>
@@ -9,9 +11,12 @@ const Order = () => {
             <h3>Order# 236589</h3>
           </div>
           <div>
-            <a href='./order-details.html' className='viewdetails-btn'>
+            <Link
+              to={`/user/order/orderdetails/${orderid}`}
+              className='viewdetails-btn'
+            >
               View Details
-            </a>
+            </Link>
           </div>
         </div>
         <div className='order-content margin-3'>

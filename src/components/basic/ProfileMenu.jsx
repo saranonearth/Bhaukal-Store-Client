@@ -23,7 +23,7 @@ const ProfileMenu = () => {
           <Link className='sidebar-item' to='/faqs'>
             FAQs
           </Link>
-          <Link to='/contactus' className='sidebar-item'>
+          <Link to='/contact' className='sidebar-item'>
             Contact Us
           </Link>
         </div>
