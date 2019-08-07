@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './components/basic/Navbar';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import Home from './components/Home';
@@ -16,12 +16,27 @@ import MainProduct from './components/MainProduct';
 import Tees from './components/Tees';
 import About from './components/About';
 import Cart from './components/Cart';
+import Alert from './components/basic/Alert/Alert';
+import Signup from './components/Signup';
+import { connect } from 'react-redux';
+import { setAuthHeader } from './utils/setAuthHeader';
+import { store } from './store';
+import { getUser } from './actions/authActions';
+import Signin from './components/Signin';
 
-function App() {
+if (localStorage.bklToken) {
+  setAuthHeader(localStorage.bklToken);
+}
+
+function App({ alert }) {
+  useEffect(() => {
+    store.dispatch(getUser());
+  }, []);
   return (
     <>
       <BrowserRouter>
         <Navbar />
+        <Alert alerts={alert} />
         <UserIcons />
         <Switch>
           <Route exact path='/' component={Home} />
@@ -40,6 +55,8 @@ function App() {
           <Route exact path='/product/:productid' component={MainProduct} />
           <Route path='/about' component={About} />
           <Route path='/faqs' component={Faqs} />
+          <Route path='/signup' component={Signup} />
+          <Route path='/signin' component={Signin} />
           <Route component={NothingFound} />
         </Switch>
       </BrowserRouter>
@@ -47,4 +64,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStatetoProps = state => {
+  return {
+    alert: state.alert
+  };
+};
+
+export default connect(mapStatetoProps)(App);

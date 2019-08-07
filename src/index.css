@@ -673,6 +673,7 @@ hr {
   right: 1%;
   height: auto;
   width: 19%;
+  z-index: 1;
 }
 
 .alert {
@@ -1409,13 +1410,17 @@ textarea {
 
 }
 
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+@media (min-width: 800px) and (max-width: 1024px) {
   .container {
     width: 95%;
   }
 
   .no-in-tablet {
     display: none;
+  }
+
+  .alerts-container {
+    width: 30%;
   }
 
   .outof-sticky {

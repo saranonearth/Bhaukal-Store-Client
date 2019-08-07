@@ -7,8 +7,12 @@ import {
 import {
     modalReducer
 } from './ModalReducer';
+import {
+    authReducer
+} from './authReducer';
 
 export const rootReducer = combineReducers({
     alert: alertReducer,
-    modal: modalReducer
+    modal: modalReducer,
+    auth: authReducer
 })
