@@ -9,4 +9,6 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILED = 'SIGNUP_FAILED';
 export const GET_USER = 'GET_USER';
 export const AUTH_ERROR = 'AUTH_ERROR'
-export const USER_LOGGEDIN = 'USER_LOGGEDIN'
+export const USER_LOGGEDIN = 'USER_LOGGEDIN';
+export const LOGOUT_USER = 'LOGOUT_USER'
+export const EDIT_PROFILE = "EDIT_PROFILE"

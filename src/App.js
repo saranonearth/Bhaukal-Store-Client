@@ -23,33 +23,39 @@ import { setAuthHeader } from './utils/setAuthHeader';
 import { store } from './store';
 import { getUser } from './actions/authActions';
 import Signin from './components/Signin';
+import ProtectedRoute from './components/ProtectedRoute';
 
 if (localStorage.bklToken) {
   setAuthHeader(localStorage.bklToken);
 }
 
-function App({ alert }) {
+function App({ alert, auth }) {
   useEffect(() => {
     store.dispatch(getUser());
   }, []);
+  console.log(auth);
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <Navbar isAuth={auth.isAuth} />
         <Alert alerts={alert} />
         <UserIcons />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/teesofthemonth' component={Tofm} />
           <Route exact path='/alltees' component={AllTees} />
-          <Route exact path='/user/orders' component={Orders} />
-          <Route exact path='/user' component={Profile} />
-          <Route path='/user/cart' component={Cart} />
-          <Route
+          <ProtectedRoute exact path='/user/orders' component={Orders} />
+          <ProtectedRoute exact path='/user' component={Profile} />
+          <ProtectedRoute path='/user/cart' component={Cart} />
+          <ProtectedRoute
             path='/user/order/orderdetails/:orderid'
             component={OrderDetails}
           />
-          <Route exact path='/user/addressdetails' component={AddressDetails} />
+          <ProtectedRoute
+            exact
+            path='/user/addressdetails'
+            component={AddressDetails}
+          />
           <Route exact path='/contact' component={Contact} />
           <Route path='/store' component={Tees} />
           <Route exact path='/product/:productid' component={MainProduct} />
@@ -66,7 +72,8 @@ function App({ alert }) {
 
 const mapStatetoProps = state => {
   return {
-    alert: state.alert
+    alert: state.alert,
+    auth: state.auth
   };
 };
 

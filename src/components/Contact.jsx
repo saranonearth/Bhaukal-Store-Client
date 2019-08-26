@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import ProfileMenu from './basic/ProfileMenu';
 import Footer from './basic/Footer';
-
-const Contact = () => {
+import { connect } from 'react-redux';
+const Contact = ({ auth }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -12,11 +12,16 @@ const Contact = () => {
       <div className='panel-container'>
         <div className='panel-wrapper'>
           <div className='panel-sidebar'>
-            <div className='sidebar-heading'>
-              <h2 className='margin-2'>Account</h2>
-            </div>
-            <hr />
-            <ProfileMenu />
+            {auth.isAuth ? (
+              <>
+                {' '}
+                <div className='sidebar-heading'>
+                  <h2 className='margin-2'>Account</h2>
+                </div>
+                <hr />
+                <ProfileMenu />
+              </>
+            ) : null}
           </div>
           <div className='contact-holder'>
             <div className='contact-heading'>
@@ -75,4 +80,8 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+const mapStatetoProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStatetoProps)(Contact);

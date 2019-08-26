@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { alert } from '../actions/AlertActions';
 import { signup } from '../actions/authActions.js';
-
-const Signup = ({ alert, signup }) => {
+import { Redirect, Link } from 'react-router-dom';
+const Signup = ({ alert, signup, isAuth }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,6 +31,9 @@ const Signup = ({ alert, signup }) => {
       [e.target.name]: e.target.value
     });
   };
+
+  if (isAuth === true) return <Redirect to='/' />;
+
   return (
     <>
       <div className='signin-container'>
@@ -42,7 +45,7 @@ const Signup = ({ alert, signup }) => {
               <br />
               <input
                 value={formData.name}
-                onChange={handleChange}
+                onChange={e => handleChange(e)}
                 type='text'
                 name='name'
               />
@@ -51,7 +54,7 @@ const Signup = ({ alert, signup }) => {
               <label htmlFor='email'>Email</label>
               <br />
               <input
-                onChange={handleChange}
+                onChange={e => handleChange(e)}
                 type='email'
                 value={formData.email}
                 name='email'
@@ -61,7 +64,7 @@ const Signup = ({ alert, signup }) => {
               <label htmlFor='password'>Password</label>
               <br />
               <input
-                onChange={handleChange}
+                onChange={e => handleChange(e)}
                 type='password'
                 value={formData.password}
                 name='password'
@@ -72,13 +75,13 @@ const Signup = ({ alert, signup }) => {
               <br />
               <input
                 value={formData.confirmPassword}
-                onChange={handleChange}
+                onChange={e => handleChange(e)}
                 type='password'
                 name='confirmPassword'
               />
             </div>
             <button
-              onChange={handleChange}
+              onChange={e => handleChange(e)}
               type='submit'
               className='btn black margin-3'
             >
@@ -86,17 +89,19 @@ const Signup = ({ alert, signup }) => {
             </button>
           </form>
           <div className='auth-holder'>
-            <a className='b-text mt-2' href='./signin.html'>
+            <Link className='b-text mt-2' to='/signin'>
               Already registed?
-            </a>
+            </Link>
           </div>
         </div>
       </div>
     </>
   );
 };
-
+const mapStatetoProps = state => ({
+  isAuth: state.auth.isAuth
+});
 export default connect(
-  null,
+  mapStatetoProps,
   { alert, signup }
 )(Signup);

@@ -673,7 +673,7 @@ hr {
   right: 1%;
   height: auto;
   width: 19%;
-  z-index: 1;
+  z-index: 0;
 }
 
 .alert {
@@ -769,6 +769,7 @@ hr {
 /* Collape FAQs */
 .faqs {
   margin-top: 20px;
+  margin-bottom: 130px;
 }
 
 .collapsible {

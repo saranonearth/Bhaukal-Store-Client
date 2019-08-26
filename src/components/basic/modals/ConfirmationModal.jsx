@@ -1,20 +1,26 @@
 import React from 'react';
 
-const ConfirmationModal = ({ propFunction, closeFunction }) => {
+const ConfirmationModal = ({ propFunction, value, closeFunction }) => {
+  console.log(value);
   return (
     <>
-      <div id='coModal' class='modal edit-profile'>
-        <div class='modal-content profile-edit'>
-          <span class='close cop'>&times;</span>
-          <div class='editprofile-form'>
+      <div id='coModal' className='modal edit-profile'>
+        <div className='modal-content profile-edit'>
+          <span className='close cop'>&times;</span>
+          <div className='editprofile-form'>
             <h1>But Why? :(</h1>
             <p>Are you sure you want to delete your Bhaukal account</p>
-            <div class='profile-buttons'>
+            <div className='profile-buttons'>
               <div>
-                <button class='btn black'>Delete</button>
+                <button
+                  onClick={() => propFunction(value)}
+                  className='btn black'
+                >
+                  Delete
+                </button>
               </div>
               <div>
-                <button onClick={() => closeFunction()} class='btn'>
+                <button onClick={() => closeFunction()} className='btn'>
                   Cancel
                 </button>
               </div>

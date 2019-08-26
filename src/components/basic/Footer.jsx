@@ -36,6 +36,9 @@ const Footer = () => {
               <Link className='no-td' to='/contact'>
                 <p className='opacity'>Contact Us</p>
               </Link>
+              <Link className='no-td' to='/faqs'>
+                <p className='opacity'>FAQs</p>
+              </Link>
             </div>
           </div>
         </div>

@@ -10,15 +10,22 @@ import {
 } from '../actions/ModalAction';
 import ConfirmationModal from './basic/modals/ConfirmationModal';
 import EditProfileModal from './basic/modals/EditProfileModal';
+import { removeUser } from '../actions/userAction';
+
 const Profile = ({
   modal,
   changePasswordModal,
   editProfileModal,
-  confirmationModal
+  confirmationModal,
+  auth,
+  removeUser
 }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const { user } = auth;
+  if (!user) return <div className='container'>Loading</div>;
   return (
     <>
       <div className='panel-container'>
@@ -49,19 +56,19 @@ const Profile = ({
                   <div className='details-profile'>
                     <div className='item-block'>
                       <div>Name:</div>
-                      <div>Saran</div>
+                      <div>{user.name}</div>
                     </div>
                     <div className='item-block mt-2'>
                       <div>Email:</div>
-                      <div>saran@text.com</div>
+                      <div>{user.email}</div>
                     </div>
                     <div className='item-block mt-2'>
                       <div>Mobile Number:</div>
-                      <div>8965758632</div>
+                      <div>{user.mobileNumber}</div>
                     </div>
                     <div className='item-block mt-2'>
                       <div>Date of Birth:</div>
-                      <div>21-05-2041</div>
+                      <div>{new Date(user.dob).toDateString()}</div>
                     </div>
                   </div>
                   <div className='editprofile-btn mt-2'>
@@ -102,7 +109,11 @@ const Profile = ({
       {modal.changePasswordModal ? <ChangePasswordModal /> : null}
       {modal.editProfileModal ? <EditProfileModal /> : null}
       {modal.confirmationModal ? (
-        <ConfirmationModal closeFunction={confirmationModal} />
+        <ConfirmationModal
+          closeFunction={confirmationModal}
+          propFunction={removeUser}
+          value={auth.user._id}
+        />
       ) : null}
       <Footer />
     </>
@@ -110,10 +121,11 @@ const Profile = ({
 };
 
 const mapStatetoProps = state => ({
-  modal: state.modal
+  modal: state.modal,
+  auth: state.auth
 });
 
 export default connect(
   mapStatetoProps,
-  { changePasswordModal, editProfileModal, confirmationModal }
+  { changePasswordModal, editProfileModal, confirmationModal, removeUser }
 )(Profile);

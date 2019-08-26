@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { signin } from '../actions/authActions';
 import { connect } from 'react-redux';
-
+import { Redirect, Link } from 'react-router-dom';
 const Signin = ({ signin, auth }) => {
   const [formData, setFormData] = useState({
     email: '',
@@ -22,19 +22,21 @@ const Signin = ({ signin, auth }) => {
       password: ''
     });
   };
-  console.log(auth);
+
+  if (auth.isAuth === true) return <Redirect to='/' />;
+
   return (
     <>
       <div className='signin-container'>
         <div className='singin-form'>
           <h2>Signin</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={e => handleSubmit(e)}>
             <div className='form-item'>
               <label htmlFor='email'>Email</label>
               <br />
               <input
                 value={formData.email}
-                onChange={handleChange}
+                onChange={e => handleChange(e)}
                 type='email'
                 name='email'
               />
@@ -44,7 +46,7 @@ const Signin = ({ signin, auth }) => {
               <br />
               <input
                 value={formData.password}
-                onChange={handleChange}
+                onChange={e => handleChange(e)}
                 type='password'
                 name='password'
               />
@@ -54,15 +56,16 @@ const Signin = ({ signin, auth }) => {
             </button>
           </form>
           <div className='auth-holder'>
-            <a className='b-text mt-2' href='./signup.html'>
+            <Link className='b-text mt-2' to='/signup'>
               New? Create account
-            </a>
+            </Link>
           </div>
         </div>
       </div>
     </>
   );
 };
+
 const mapStatetoProps = state => {
   return {
     auth: state.auth

@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const Navbar = () => {
+import { connect } from 'react-redux';
+import { logout } from '../../actions/authActions';
+
+const Navbar = ({ logout, isAuth }) => {
+  console.log(isAuth);
   return (
     <>
       <header>
@@ -20,13 +24,20 @@ const Navbar = () => {
           <div className='account no-in-mobile'>
             <div className='dropdown'>
               <div>
-                <i className='dropbtn far fa-user user-icon' />
+                <Link to='/signin'>
+                  {' '}
+                  <i className='dropbtn far fa-user user-icon' />
+                </Link>
               </div>
-              <div className='dropdown-content'>
-                <Link to='/user/orders'>Orders</Link>
-                <Link to='/faqs'>FAQs</Link>
-                <Link to='#'>Logout</Link>
-              </div>
+              {isAuth ? (
+                <div className='dropdown-content'>
+                  <Link to='/user/orders'>Orders</Link>
+                  <Link to='/faqs'>FAQs</Link>
+                  <Link to='/' onClick={() => logout()}>
+                    Logout
+                  </Link>
+                </div>
+              ) : null}
             </div>
           </div>
         </nav>
@@ -35,4 +46,7 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default connect(
+  null,
+  { logout }
+)(Navbar);

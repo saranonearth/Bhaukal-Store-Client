@@ -1,6 +1,14 @@
 import axios from 'axios';
-import { alert } from './AlertActions';
-import { SIGNUP_SUCCESS, AUTH_ERROR, GET_USER, USER_LOGGEDIN } from './types';
+import {
+  alert
+} from './AlertActions';
+import {
+  SIGNUP_SUCCESS,
+  AUTH_ERROR,
+  GET_USER,
+  USER_LOGGEDIN,
+  LOGOUT_USER
+} from './types';
 
 export const getUser = () => async dispatch => {
   try {
@@ -14,6 +22,7 @@ export const getUser = () => async dispatch => {
   } catch (error) {
     const errors = error.response.data.errors;
     if (errors) {
+      console.log(errors)
       errors.forEach(error => dispatch(alert(error.msg)));
     }
     dispatch({
@@ -23,7 +32,11 @@ export const getUser = () => async dispatch => {
 };
 
 export const signup = formData => async dispatch => {
-  const { name, email, password } = formData;
+  const {
+    name,
+    email,
+    password
+  } = formData;
   const body = JSON.stringify({
     name,
     email,
@@ -36,13 +49,11 @@ export const signup = formData => async dispatch => {
   };
   try {
     const res = await axios.post('/auth/signup', body, config);
-    console.log('apple', res.data);
-
     dispatch({
       type: SIGNUP_SUCCESS,
       payload: res.data.token
     });
-
+    window.location.reload()
     dispatch(alert(res.data.msg));
   } catch (error) {
     const errors = error.response.data.errors;
@@ -56,7 +67,10 @@ export const signup = formData => async dispatch => {
 };
 
 export const signin = formData => async dispatch => {
-  const { password, email } = formData;
+  const {
+    password,
+    email
+  } = formData;
 
   const body = JSON.stringify({
     email,
@@ -74,7 +88,9 @@ export const signin = formData => async dispatch => {
       type: USER_LOGGEDIN,
       payload: res.data.token
     });
+
     dispatch(alert(res.data.msg));
+    window.location.reload()
   } catch (error) {
     const errors = error.response.data.errors;
     if (errors) {
@@ -85,3 +101,11 @@ export const signin = formData => async dispatch => {
     });
   }
 };
+
+export const logout = () => dispatch => {
+  dispatch({
+    type: LOGOUT_USER
+  })
+
+  dispatch(alert("Stay Bhaukal!"))
+}

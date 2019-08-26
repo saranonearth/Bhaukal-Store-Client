@@ -3,7 +3,9 @@ import {
     SIGNUP_FAILED,
     AUTH_ERROR,
     GET_USER,
-    USER_LOGGEDIN
+    USER_LOGGEDIN,
+    LOGOUT_USER,
+    EDIT_PROFILE
 } from '../actions/types'
 
 const initialState = {
@@ -31,6 +33,7 @@ export const authReducer = (state = initialState, action) => {
             }
             case SIGNUP_FAILED:
             case AUTH_ERROR:
+            case LOGOUT_USER:
                 localStorage.removeItem('bklToken')
                 return {
                     user: null,
@@ -39,6 +42,7 @@ export const authReducer = (state = initialState, action) => {
                         isAuth: false
                 }
                 case GET_USER:
+                case EDIT_PROFILE:
                     return {
                         ...state,
                         user: payload,
